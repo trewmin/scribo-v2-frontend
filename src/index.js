@@ -8,7 +8,6 @@ import { applyMiddleware, compose, combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import authReducer from './reducers/authReducer';
-import curUserReducer from './reducers/curUserReducer';
 import curLectReducer from './reducers/curLectReducer';
 import curNbReducer from './reducers/curNbReducer';
 
@@ -19,7 +18,6 @@ import thunk from "redux-thunk";
 
 const allReducers = combineReducers({
   auth: authReducer,
-  currentUser: curUserReducer,
   currentLect: curLectReducer,
   currentNb: curNbReducer
 })
@@ -35,15 +33,6 @@ const store = createStore(
     auth: {
       user: {},
       userIsLoggedIn: false
-    },
-    currentUser: {
-      id: null,
-      user_name: "",
-      password_digest: "",
-      first_name: "",
-      last_name: "",
-      email: "",
-      lectures: []
     },
     currentLect: {
       id: null,

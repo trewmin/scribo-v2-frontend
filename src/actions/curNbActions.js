@@ -2,10 +2,17 @@ import NbAdapter from '../adapters/NbAdapter'
 
 export function fetchCurNb(id) {
   return dispatch => {
-    UserAdapter.fetchNb(id)
+    NbAdapter.fetchNb(id)
       .then( data => {if (!data.error) {
         dispatch(setCurNb(data))
       }})
+  }
+}
+
+export function updateCurUserNb(notebook) {
+  return dispatch => {
+    dispatch(setCurNb(notebook))
+    NbAdapter.updateNb(notebook)
   }
 }
 

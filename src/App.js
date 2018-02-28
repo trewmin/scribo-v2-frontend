@@ -10,16 +10,15 @@ import LectureContainer from './components/lecture/LectureContainer';
 
 import { currentUser, logOut } from './actions/authActions';
 
+
 class App extends Component {
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     this.props.currentUser()
   }
 
-  renderLogoutButton = () => {
-    if (this.props.auth.userIsLoggedIn) {
-      return (<button onClick={ this.props.logOut }> Log Out </button>)
-    }
+  componentDidUpdate = () => {
+
   }
 
   render() {
@@ -57,6 +56,13 @@ class App extends Component {
       </div>
     );
   }
+
+  renderLogoutButton = () => {
+    if (this.props.auth.userIsLoggedIn) {
+      return (<button onClick={ this.props.logOut }> Log Out </button>)
+    }
+  }
+
 }
 
 export default withRouter(connect((state) => ({ auth: state.auth }), { currentUser, logOut })(App));

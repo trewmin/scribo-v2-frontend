@@ -1,33 +1,28 @@
 import React, { Component } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 
-import { fetchCurUser } from '../../actions/curUserActions';
-
-import LectureListing from './lectureListing';
-
 class HomeContainer extends Component {
-
-  componentWillMount = () => {
-    this.props.fetchCurUser(this.props.auth.user.id)
-  }
 
   render() {
     return (
       <div>
         <h1>Home</h1>
-        <h2>Welcome, {this.props.currentUser.first_name}</h2>
-        {this.renderLectures()}
+        <h2>Welcome, {this.props.auth.user.first_name}</h2>
+        {this.renderLectureLinks()}
       </div>
     )
   }
 
-  renderLectures = () => {
-    return this.props.currentUser.lectures.map( lecture => {
-      return(<LectureListing lecture={lecture} key={lecture.id}/>)
+  renderLectureLinks = () => {
+    return this.props.auth.user.lectures.map( lecture => {
+      const path = `/lecture/${lecture.id}`
+      return(<Link to={path} key={lecture.id}>{lecture.title}</Link>)
     })
   }
 
 }
 
-export default connect((state) => ({ auth: state.auth, currentUser: state.currentUser }), { fetchCurUser })(HomeContainer);
+export default connect((state) => ({ auth: state.auth }), { })(HomeContainer);

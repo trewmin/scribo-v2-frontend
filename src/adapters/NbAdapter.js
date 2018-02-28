@@ -14,4 +14,15 @@ export default class CurNbAdapter {
       headers: headers(),
     }).then(res => res.json())
   }
+
+  static updateNb (notebook) {
+    return fetch(`${baseUrl}/${notebook.id}`, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(notebook)
+    }).then(resp => resp.json())
+  }
 }

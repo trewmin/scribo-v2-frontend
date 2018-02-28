@@ -7,7 +7,7 @@ function headers () {
   }
 }
 
-export default class CurUserAdapter {
+export default class UserAdapter {
   static fetchUser (id) {
     return fetch(`${baseUrl}/${id}`, {
       method: 'GET',

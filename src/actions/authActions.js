@@ -5,7 +5,7 @@ export function login(user_name, password) {
     AuthAdapter.login({user_name, password})
       .then( data => {if (!data.error) {
         dispatch(setAuth({
-                  user: data.user,
+                  user: data.user.user,
                   userIsLoggedIn: true
         }))
         localStorage.setItem('jwt', data.jwt )
