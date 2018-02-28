@@ -1,21 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import { connect } from 'react-redux';
+
+import { updateAuth } from './actions/authActions';
+
+import { Route, Switch, Redirect, withRouter, Link } from 'react-router-dom'
+
+import LoggedOutContainer from './components/loggedout/LoggedOutContainer';
+import HomeContainer from './components/home/HomeContainer';
 
 class App extends Component {
+
   render() {
+    console.log(this.props);
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <img src='https://i.pinimg.com/originals/be/a8/a5/bea8a582a7376eee317c7a17f2f793ea.jpg' alt='WORKS'/>
+        <Switch>
+          <Route exact path='/' render={()=>
+            {
+              return this.props.auth.userIsLoggedIn ? <Redirect to="/home"/> : <LoggedOutContainer />
+            }
+            } />
+
+         <Route exact path='/home' render={()=>
+            {
+              return this.props.auth.userIsLoggedIn ? <HomeContainer /> : <LoggedOutContainer />
+            }
+            } />
+            
+        </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default connect((state) => ({ auth: state.auth }), { updateAuth })(withRouter(App));
