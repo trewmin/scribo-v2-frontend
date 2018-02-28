@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { fetchCurUser } from '../../actions/curUserActions';
 
+import LectureListing from './lectureListing';
+
 class HomeContainer extends Component {
 
   componentWillMount = () => {
@@ -15,8 +17,15 @@ class HomeContainer extends Component {
       <div>
         <h1>Home</h1>
         <h2>Welcome, {this.props.currentUser.first_name}</h2>
+        {this.renderLectures()}
       </div>
     )
+  }
+
+  renderLectures = () => {
+    return this.props.currentUser.lectures.map( lecture => {
+      return(<LectureListing lecture={lecture} key={lecture.id}/>)
+    })
   }
 
 }

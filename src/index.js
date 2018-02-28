@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 
 import authReducer from './reducers/authReducer';
 import curUserReducer from './reducers/curUserReducer';
+import curLectReducer from './reducers/curLectReducer';
 
 import { BrowserRouter } from 'react-router-dom';
 
@@ -17,7 +18,8 @@ import thunk from "redux-thunk";
 
 const allReducers = combineReducers({
   auth: authReducer,
-  currentUser: curUserReducer
+  currentUser: curUserReducer,
+  currentLect: curLectReducer
 })
 
 const allStoreEnhancers = compose(
@@ -40,7 +42,15 @@ const store = createStore(
       last_name: "",
       email: "",
       lectures: []
-    }
+    },
+    currentLect: {
+      id: null,
+      title: "",
+      date_time: "",
+      admin: {},
+      users: [],
+      notebooks: []
+    },
   },
   allStoreEnhancers
 );

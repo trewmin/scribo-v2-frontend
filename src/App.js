@@ -2,16 +2,28 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import { Route, Switch, Redirect, withRouter, Link } from 'react-router-dom'
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 
 import LoggedOutContainer from './components/loggedout/LoggedOutContainer';
 import HomeContainer from './components/home/HomeContainer';
+import LectureContainer from './components/lecture/LectureContainer';
+
+import { currentUser, logOut } from './actions/authActions';
 
 class App extends Component {
 
+  componentWillMount = () => {
+    this.props.currentUser()
+  }
+
+  renderLogoutButton = () => {
+    if (this.props.auth.userIsLoggedIn) {
+      return (<button onClick={ this.props.logOut }> Log Out </button>)
+    }
+  }
+
   render() {
     console.log(this.props);
-
     return (
       <div className="App">
         <h1> Scribo </h1>
@@ -30,11 +42,19 @@ class App extends Component {
             }
             } />
 
+        <Route exact path='/lecture/:id' render={(routerProps)=>
+           {
+             return this.props.auth.userIsLoggedIn ? <LectureContainer id={routerProps.match.params.id}  /> : <LoggedOutContainer />
+           }
+           } />
+
         </Switch>
-        
+
+        {this.renderLogoutButton()}
+
       </div>
     );
   }
 }
 
-export default connect((state) => ({ auth: state.auth }))(withRouter(App));
+export default withRouter(connect((state) => ({ auth: state.auth }), { currentUser, logOut })(App));

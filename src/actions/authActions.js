@@ -13,6 +13,28 @@ export function login(user_name, password) {
   }
 }
 
+export function currentUser() {
+  return dispatch => {
+    AuthAdapter.currentUser()
+      .then( user => {if (!user.error) {
+        dispatch(setAuth({
+                  user: user,
+                  userIsLoggedIn: true
+        }))
+      }})
+  }
+}
+
+export function logOut() {
+  console.log("clicked");
+  return dispatch => {dispatch(setAuth({
+            user: "",
+            userIsLoggedIn: false
+  }))
+    localStorage.removeItem('jwt')}
+}
+
+
 export function setAuth(newAuth){
   return {
     type: "SET_AUTH",
