@@ -50,7 +50,9 @@ class App extends Component {
 
         </Switch>
 
-        {this.renderLogoutButton()}
+        <div>
+          {this.renderLogoutButton()}
+        </div>
 
       </div>
     );
