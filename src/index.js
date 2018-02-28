@@ -4,17 +4,24 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-import { combineReducers, createStore } from 'redux';
+import { applyMiddleware, compose, combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-import authReducer from './reducers/authReducer'
+import authReducer from './reducers/authReducer';
 
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom';
+
+import thunk from "redux-thunk";
 
 
 const allReducers = combineReducers({
   auth: authReducer
 })
+
+const allStoreEnhancers = compose(
+  applyMiddleware(thunk),
+  window.devToolsExtension && window.devToolsExtension()
+)
 
 const store = createStore(
   allReducers,
@@ -24,7 +31,7 @@ const store = createStore(
             userIsLoggedIn: false
           }
   },
-  window.devToolsExtension && window.devToolsExtension()
+  allStoreEnhancers
 );
 
 ReactDOM.render((

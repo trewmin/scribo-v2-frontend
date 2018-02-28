@@ -2,15 +2,13 @@
 
 export default function authReducer(
   state = {
-    auth: {
             user: "",
             userIsLoggedIn: false
-          }
   },
   { type, payload }
 ) {
   switch (type) {
-    case "UPDATE_AUTH":
+    case "SET_AUTH":
       return payload.auth
     default:
       return state

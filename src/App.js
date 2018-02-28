@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import { updateAuth } from './actions/authActions';
-
 import { Route, Switch, Redirect, withRouter, Link } from 'react-router-dom'
 
 import LoggedOutContainer from './components/loggedout/LoggedOutContainer';
@@ -16,7 +14,9 @@ class App extends Component {
 
     return (
       <div className="App">
+        <h1> Scribo </h1>
         <img src='https://i.pinimg.com/originals/be/a8/a5/bea8a582a7376eee317c7a17f2f793ea.jpg' alt='WORKS'/>
+
         <Switch>
           <Route exact path='/' render={()=>
             {
@@ -29,11 +29,12 @@ class App extends Component {
               return this.props.auth.userIsLoggedIn ? <HomeContainer /> : <LoggedOutContainer />
             }
             } />
-            
+
         </Switch>
+        
       </div>
     );
   }
 }
 
-export default connect((state) => ({ auth: state.auth }), { updateAuth })(withRouter(App));
+export default connect((state) => ({ auth: state.auth }))(withRouter(App));
