@@ -1,5 +1,3 @@
-// import { UPDATE_USER } from '../actions/userActions';
-
 export default function authReducer(
   state = {
             user: "",

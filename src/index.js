@@ -8,6 +8,7 @@ import { applyMiddleware, compose, combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import authReducer from './reducers/authReducer';
+import curUserReducer from './reducers/curUserReducer';
 
 import { BrowserRouter } from 'react-router-dom';
 
@@ -15,7 +16,8 @@ import thunk from "redux-thunk";
 
 
 const allReducers = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  currentUser: curUserReducer
 })
 
 const allStoreEnhancers = compose(
@@ -27,9 +29,18 @@ const store = createStore(
   allReducers,
   {
     auth: {
-            user: "",
-            userIsLoggedIn: false
-          }
+      user: {},
+      userIsLoggedIn: false
+    },
+    currentUser: {
+      id: null,
+      user_name: "",
+      password_digest: "",
+      first_name: "",
+      last_name: "",
+      email: "",
+      lectures: []
+    }
   },
   allStoreEnhancers
 );
