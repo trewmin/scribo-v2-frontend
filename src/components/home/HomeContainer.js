@@ -11,15 +11,16 @@ class HomeContainer extends Component {
       <div>
         <h1>Home</h1>
         <h2>Welcome, {this.props.auth.user.first_name}</h2>
-        {this.renderLectureLinks()}
+        <ul>{this.renderLectureLinks()}</ul>
       </div>
     )
   }
 
   renderLectureLinks = () => {
+
     return this.props.auth.user.lectures.map( lecture => {
       const path = `/lecture/${lecture.id}`
-      return(<Link to={path} key={lecture.id}>{lecture.title}</Link>)
+      return(<li key={lecture.id}><Link to={path} key={lecture.id}>{lecture.title}</Link></li>)
     })
   }
 

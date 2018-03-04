@@ -12,7 +12,7 @@ export default function curNbReducer(
 ) {
   switch (type) {
     case "SET_CUR_NB":
-      return payload.currentNb
+      return payload.curNb
     default:
       return state
   }

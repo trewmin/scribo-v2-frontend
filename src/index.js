@@ -10,21 +10,25 @@ import { Provider } from 'react-redux';
 import authReducer from './reducers/authReducer';
 import curLectReducer from './reducers/curLectReducer';
 import curNbReducer from './reducers/curNbReducer';
+import allUsersReducer from './reducers/allUsersReducer';
 
 import { BrowserRouter } from 'react-router-dom';
 
 import thunk from "redux-thunk";
 
+import { ActionCableProvider } from 'react-actioncable-provider';
+
 
 const allReducers = combineReducers({
   auth: authReducer,
-  currentLect: curLectReducer,
-  currentNb: curNbReducer
+  curLect: curLectReducer,
+  curNb: curNbReducer,
+  allUsers: allUsersReducer
 })
 
 const allStoreEnhancers = compose(
   applyMiddleware(thunk),
-  window.devToolsExtension && window.devToolsExtension()
+  // window.devToolsExtension && window.devToolsExtension()
 )
 
 const store = createStore(
@@ -34,7 +38,7 @@ const store = createStore(
       user: {},
       userIsLoggedIn: false
     },
-    currentLect: {
+    curLect: {
       id: null,
       title: "",
       date_time: "",
@@ -42,7 +46,7 @@ const store = createStore(
       users: [],
       notebooks: []
     },
-    currentNb: {
+    curNb: {
       id: null,
       lecture_id: null,
       user_id: null,
@@ -50,16 +54,21 @@ const store = createStore(
       updated_at: "",
       user: {},
       lecture: {}
-    }
+    },
+    allUsers: []
   },
   allStoreEnhancers
 );
 
+const wsBaseURL = 'ws://localhost:3001/cable'
+
 ReactDOM.render((
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>
+  <ActionCableProvider url={wsBaseURL}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </ ActionCableProvider>
   ), document.getElementById('root'));
 registerServiceWorker();

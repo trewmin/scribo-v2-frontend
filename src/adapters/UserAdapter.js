@@ -14,4 +14,11 @@ export default class UserAdapter {
       headers: headers(),
     }).then(res => res.json())
   }
+
+  static fetchAllUsers () {
+    return fetch(`${baseUrl}`, {
+      method: 'GET',
+      headers: headers(),
+    }).then(res => res.json())
+  }
 }

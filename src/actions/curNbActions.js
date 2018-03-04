@@ -20,7 +20,7 @@ export function setCurNb(newCurNb){
   return {
     type: "SET_CUR_NB",
     payload: {
-      currentNb: newCurNb
+      curNb: newCurNb
     }
   }
 }

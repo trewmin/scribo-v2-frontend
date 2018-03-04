@@ -1,4 +1,4 @@
-import LectAdapter from '../adapters/LectAdapter'
+import LectAdapter from '../adapters/LectAdapter';
 
 export function fetchCurLect(id) {
   return dispatch => {
@@ -9,11 +9,20 @@ export function fetchCurLect(id) {
   }
 }
 
+export function createLect(adminId, title, dateTime, usersToInvite) {
+  return dispatch => {
+    LectAdapter.createLect(adminId, title, dateTime, usersToInvite)
+      .then( data => {if (!data.error) {
+        dispatch(setCurLect(data))
+      }})
+  }
+}
+
 export function setCurLect(newCurLect){
   return {
     type: "SET_CUR_LECT",
     payload: {
-      currentLect: newCurLect
+      curLect: newCurLect
     }
   }
 }

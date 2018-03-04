@@ -32,7 +32,7 @@ export default class AuthAdapter {
     }).then(res => res.json())
   }
 
-  static currentUser () {
+  static curUser () {
     return fetch(`${baseUrl}/current_user`, {
       headers: headers()
     }).then(res => res.json())

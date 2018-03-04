@@ -13,9 +13,9 @@ export function login(user_name, password) {
   }
 }
 
-export function currentUser() {
+export function curUser() {
   return dispatch => {
-    AuthAdapter.currentUser()
+    AuthAdapter.curUser()
       .then( user => {if (!user.error) {
         dispatch(setAuth({
                   user: user,

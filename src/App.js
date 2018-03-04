@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
+import { Route, Switch, Redirect, withRouter, Link } from 'react-router-dom'
 
 import LoggedOutContainer from './components/loggedout/LoggedOutContainer';
 import HomeContainer from './components/home/HomeContainer';
 import LectureContainer from './components/lecture/LectureContainer';
+import NewLectureContainer from './components/newlecture/NewLectureContainer';
 
-import { currentUser, logOut } from './actions/authActions';
+import { curUser, logOut } from './actions/authActions';
 
 
 class App extends Component {
 
   componentDidMount = () => {
-    this.props.currentUser()
+    this.props.curUser()
   }
 
   componentDidUpdate = () => {
@@ -25,19 +26,25 @@ class App extends Component {
     console.log(this.props);
     return (
       <div className="App">
-        <h1> Scribo </h1>
-        <img src='https://i.pinimg.com/originals/be/a8/a5/bea8a582a7376eee317c7a17f2f793ea.jpg' alt='WORKS'/>
+        <h1> Screebo </h1>
+        <img src='https://shoeuntied.files.wordpress.com/2016/09/sealion.jpg' alt='WORKS'/>
 
         <Switch>
-          <Route exact path='/' render={()=>
+          <Route exact path='/' render={( )=>
             {
               return this.props.auth.userIsLoggedIn ? <Redirect to="/home"/> : <LoggedOutContainer />
             }
             } />
 
-         <Route exact path='/home' render={()=>
+         <Route exact path='/home' render={( )=>
             {
               return this.props.auth.userIsLoggedIn ? <HomeContainer /> : <LoggedOutContainer />
+            }
+            } />
+
+        <Route exact path='/lecture/new' render={( )=>
+            {
+              return this.props.auth.userIsLoggedIn ? <NewLectureContainer  /> : <LoggedOutContainer />
             }
             } />
 
@@ -50,19 +57,26 @@ class App extends Component {
         </Switch>
 
         <div>
-          {this.renderLogoutButton()}
+          {this.renderMenuButtons()}
         </div>
 
       </div>
     );
   }
 
-  renderLogoutButton = () => {
+  renderMenuButtons = () => {
     if (this.props.auth.userIsLoggedIn) {
-      return (<button onClick={ this.props.logOut }> Log Out </button>)
+      return (
+        <div>
+        <br/>
+          <Link to='/home'><button> Home </button></Link>
+          <Link to='/lecture/new'><button> New Lecture </button></Link>
+          <button onClick={ this.props.logOut }> Log Out </button>
+        </div>
+      )
     }
   }
 
 }
 
-export default withRouter(connect((state) => ({ auth: state.auth }), { currentUser, logOut })(App));
+export default withRouter(connect((state) => ({ auth: state.auth }), { curUser, logOut })(App));

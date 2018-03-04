@@ -11,7 +11,7 @@ export default function curLectReducer(
 ) {
   switch (type) {
     case "SET_CUR_LECT":
-      return payload.currentLect
+      return payload.curLect
     default:
       return state
   }
