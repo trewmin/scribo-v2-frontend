@@ -6,14 +6,14 @@ import { ActionCable } from 'react-actioncable-provider';
 
 import ContentEditable from 'react-contenteditable';
 
-import { setCurNb } from '../../actions/curNbActions';
+import { setCurNb, updateCurUserNb } from '../../actions/curNbActions';
 
 // import { Link } from 'react-router-dom';
 
 class NotebookContainer extends Component {
 
   state = {
-    noteToAddToNotebook: ''
+    noteToAdd: ""
   }
 
   render() {
@@ -34,15 +34,38 @@ class NotebookContainer extends Component {
              html={this.props.curNb.content} // innerHTML of the editable div
              disabled={true}       // use true to disable edition
            />
+
+     {this.state.noteToAdd !== "" ? <ContentEditable html={this.formatedNoteToAdd(this.state.noteToAdd)} disabled={true} /> : <br />}
+
+     {new Date(this.props.curNb.updated_at).toString()}
+
      <ContentEditable
-             ref={(input) => { this.noteToAddToNotebook = input }}
-             html={this.props.curNb.content}
+             html={this.state.noteToAdd}
              disabled={false}
-             onChange={this.handleAutoUpdateCurUserNb}
-             onBlur={this.handleUpdateCurUserNb}
+             onChange={this.handleNoteToAddChange}
            />
+
+    <button onClick={this.handleAddNote}>Add Note</button>
     </div>
   )}
+
+  handleNoteToAddChange = (e) => {
+    this.setState({
+      noteToAdd: e.target.value
+    })
+  }
+
+  handleAddNote = e => {
+    this.props.curNb.content += this.formatedNoteToAdd(this.state.noteToAdd)
+    this.props.updateCurUserNb(this.props.curNb)
+    this.setState({noteToAdd: ""})
+  }
+
+  formatedNoteToAdd = (noteToAdd) => {
+    return `<p>[ (Note from ${this.props.auth.user.user_name}): ${noteToAdd} ]</p>`
+  }
 }
 
-export default connect((state) => ({ auth: state.auth, curNb: state.curNb}), { setCurNb })(NotebookContainer);
+
+
+export default connect((state) => ({ auth: state.auth, curNb: state.curNb}), { setCurNb, updateCurUserNb })(NotebookContainer);

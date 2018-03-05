@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
+import SimpleWebRTC from 'simplewebrtc';
+
 import { fetchCurLect } from '../../actions/curLectActions';
 import { fetchCurNb } from '../../actions/curNbActions';
 
@@ -47,8 +49,6 @@ class LectureContainer extends Component {
   }
 
   render() {
-    console.log(this.props);
-    console.log("TEST");
     return (
       <div>
         <h1>{this.props.curLect.title}</h1>

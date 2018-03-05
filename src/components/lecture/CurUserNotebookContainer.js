@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
+import { ActionCable } from 'react-actioncable-provider';
+
 // import { Link } from 'react-router-dom';
 
 import ContentEditable from 'react-contenteditable';
 
-import { updateCurUserNb } from '../../actions/curNbActions';
+import { setCurNb, updateCurUserNb } from '../../actions/curNbActions';
 
 class NotebookContainer extends Component {
 
@@ -18,7 +20,18 @@ class NotebookContainer extends Component {
   render() {
   return (
     <div>
-      <div>{this.state.status} <button onClick={this.handleUpdateCurUserNb}>Save</button></div>
+    <ActionCable
+      channel={{
+         channel: 'NotebooksChannel',
+         notebook_id: this.props.curNb.id
+       }}
+       onReceived= { notebook => {
+         console.log("CABLE WORKING?");
+         this.props.setCurNb(notebook)
+         let now = new Date()
+         this.setState({lastSave: now, status: "Saved"})
+       }}/>
+
       <ContentEditable
               ref={(input) => { this.notebook = input }}
               html={this.props.curNb.content}
@@ -26,6 +39,7 @@ class NotebookContainer extends Component {
               onChange={this.handleAutoUpdateCurUserNb}
               onBlur={this.handleUpdateCurUserNb}
             />
+     <div>{this.state.status} <button onClick={this.handleUpdateCurUserNb}>Save</button></div>
     </div>
   )
 }
@@ -56,4 +70,4 @@ class NotebookContainer extends Component {
 
 }
 
-export default connect((state) => ({ auth: state.auth, curNb: state.curNb}), { updateCurUserNb })(NotebookContainer);
+export default connect((state) => ({ auth: state.auth, curNb: state.curNb}), { setCurNb, updateCurUserNb })(NotebookContainer);
