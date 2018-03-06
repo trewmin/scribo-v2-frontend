@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import SimpleWebRTC from 'simplewebrtc';
-
 import { fetchCurLect } from '../../actions/curLectActions';
 import { fetchCurNb } from '../../actions/curNbActions';
 
