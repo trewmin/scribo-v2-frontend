@@ -16,6 +16,15 @@ export function updateCurUserNb(notebook) {
   }
 }
 
+
+export function updateNbContent(update, notebook) {
+  return dispatch => {
+    notebook.content = update
+    dispatch(setCurNb(notebook))
+    NbAdapter.updateNb(notebook)
+  }
+}
+
 export function setCurNb(newCurNb){
   return {
     type: "SET_CUR_NB",

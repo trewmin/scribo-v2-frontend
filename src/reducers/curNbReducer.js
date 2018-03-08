@@ -3,8 +3,9 @@ export default function curNbReducer(
     id: null,
     lecture_id: null,
     user_id: null,
-    content: "",
+    content: {},
     updated_at: "",
+    video_id: "",
     user: {},
     lecture: {}
   },

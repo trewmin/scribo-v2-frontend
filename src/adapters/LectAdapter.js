@@ -15,11 +15,11 @@ export default class CurLectAdapter {
     }).then(res => res.json())
   }
 
-  static createLect (adminId, title, dateTime, usersToInvite) {
+  static createLect (adminId, title, usersToInvite) {
     return fetch(`${baseUrl}/`, {
       method: 'POST',
       headers: headers(),
-      body: JSON.stringify({admin_id: adminId, title: title, date_time: dateTime, users: usersToInvite})
+      body: JSON.stringify({admin_id: adminId, title: title, users: usersToInvite})
     }).then(res => res.json())
   }
 }

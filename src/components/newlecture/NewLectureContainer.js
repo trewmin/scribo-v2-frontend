@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import moment from 'moment';
 import { PowerSelectMultiple } from 'react-power-select';
@@ -15,35 +15,21 @@ class NewLectureContainer extends Component {
 
   state = {
     title: "Title",
-    dateTime: moment().format().slice(0, -9),
     admin: this.props.auth.user,
     usersToInvite: []
   }
 
   componentDidMount = () => {
-    this.props.fetchAllUsers()
+    // this.props.fetchAllUsers()
   }
 
   render() {
     return (
       <div>
-      <h1>{this.state.title}</h1>
-      <h2>{new Date(this.state.dateTime).toUTCString()}</h2>
-      <h2>{this.state.admin.first_name}</h2>
-      <p>{this.state.usersToInvite.map( user => user.user_name + " ")}</p>
       <br />
       <input type='text' name={'title'} value={this.state.title} onChange={this.handleChange}/><br />
-      <input type='datetime-local' name={'dateTime'} value={this.state.dateTime} onChange={this.handleChange}/>
-
-      <PowerSelectMultiple
-        options={this.allUsersNoCurUser()}
-        selected={this.state.usersToInvite}
-        optionLabelPath="user_name"
-        onChange={this.handleSelectChange}
-        placeholder="Select other users to invite"
-      />
       <br/>
-      <button onClick={this.handleCreateLect}>Submit</button>
+      <Link to={'/home'} ><button onClick={this.handleCreateLect}>Submit</button></Link>
       </div>
     )
   }
@@ -63,7 +49,7 @@ class NewLectureContainer extends Component {
   }
 
   handleCreateLect = () => {
-    this.props.createLect(this.state.admin.id, this.state.title, this.state.dateTime, this.state.usersToInvite)
+    this.props.createLect(this.state.admin.id, this.state.title, this.state.usersToInvite)
   }
 
 

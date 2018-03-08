@@ -18,15 +18,12 @@ class App extends Component {
     this.props.curUser()
   }
 
-  componentDidUpdate = () => {
-
-  }
-
   render() {
     return (
-      <div className="App">
-        <h1> Screebo </h1>
-        <img src='https://shoeuntied.files.wordpress.com/2016/09/sealion.jpg' alt='WORKS'/>
+      <div id="App">
+        <div id="Menu">
+          {this.renderMenuButtons()}
+        </div>
 
         <Switch>
           <Route exact path='/' render={( )=>
@@ -41,23 +38,19 @@ class App extends Component {
             }
             } />
 
-        <Route exact path='/lecture/new' render={( )=>
+        <Route exact path='/note/new' render={( )=>
             {
               return this.props.auth.userIsLoggedIn ? <NewLectureContainer  /> : <LoggedOutContainer />
             }
             } />
 
-        <Route exact path='/lecture/:id' render={(routerProps)=>
+        <Route exact path='/note/:id' render={(routerProps)=>
            {
              return this.props.auth.userIsLoggedIn ? <LectureContainer id={routerProps.match.params.id}  /> : <LoggedOutContainer />
            }
            } />
 
         </Switch>
-
-        <div>
-          {this.renderMenuButtons()}
-        </div>
 
       </div>
     );
@@ -69,8 +62,8 @@ class App extends Component {
         <div>
         <br/>
           <Link to='/home'><button> Home </button></Link>
-          <Link to='/lecture/new'><button> New Lecture </button></Link>
-          <button onClick={ this.props.logOut }> Log Out </button>
+          <Link to='/note/new'><button> New Note </button></Link>
+          <Link to='/'><button onClick={ this.props.logOut }> Log Out </button></Link>
         </div>
       )
     }

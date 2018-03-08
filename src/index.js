@@ -28,7 +28,7 @@ const allReducers = combineReducers({
 
 const allStoreEnhancers = compose(
   applyMiddleware(thunk),
-  // window.devToolsExtension && window.devToolsExtension()
+  window.devToolsExtension && window.devToolsExtension()
 )
 
 const store = createStore(
@@ -50,8 +50,9 @@ const store = createStore(
       id: null,
       lecture_id: null,
       user_id: null,
-      content: "",
+      content: {},
       updated_at: "",
+      video_id: "",
       user: {},
       lecture: {}
     },

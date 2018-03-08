@@ -13,6 +13,19 @@ export function login(user_name, password) {
   }
 }
 
+export function signUp(user_name, first_name, last_name, password, password_confirmation) {
+  return dispatch => {
+    AuthAdapter.signUp({user_name, first_name, last_name, password, password_confirmation})
+      .then( data => {if (!data.error) {
+        dispatch(setAuth({
+                  user: data.user.user,
+                  userIsLoggedIn: true
+        }))
+        localStorage.setItem('jwt', data.jwt )
+      }})
+  }
+}
+
 export function curUser() {
   return dispatch => {
     AuthAdapter.curUser()

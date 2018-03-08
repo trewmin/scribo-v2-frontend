@@ -9,9 +9,9 @@ export function fetchCurLect(id) {
   }
 }
 
-export function createLect(adminId, title, dateTime, usersToInvite) {
+export function createLect(adminId, title, usersToInvite) {
   return dispatch => {
-    LectAdapter.createLect(adminId, title, dateTime, usersToInvite)
+    LectAdapter.createLect(adminId, title, usersToInvite)
       .then( data => {if (!data.error) {
         dispatch(setCurLect(data))
       }})
