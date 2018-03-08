@@ -61,9 +61,9 @@ class App extends Component {
       return (
         <div>
         <br/>
-          <Link to='/home'><button> Home </button></Link>
-          <Link to='/note/new'><button> New Note </button></Link>
-          <Link to='/'><button onClick={ this.props.logOut }> Log Out </button></Link>
+          <Link to='/home' alt={"Home"}><button className="MenuButton" alt={"Home"}> <i class="material-icons">home</i> </button></Link>
+          <Link to='/note/new' alt={"New Note"}><button className="MenuButton" alt={"New Note"}> <i class="material-icons">note_add</i> </button></Link>
+          <Link to='/' alt={"Sign Out"}><button onClick={ this.props.logOut } className="MenuButton" alt={"Sign Out"}> <i class="material-icons">exit_to_app</i> </button></Link>
         </div>
       )
     }

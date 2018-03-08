@@ -12,9 +12,12 @@ class HomeContainer extends Component {
     return (
       <div className="Main">
         <div className="Left">
-          <h1>Home</h1>
-          <h2>Welcome, {this.props.auth.user.first_name}</h2>
-          <ul>{this.renderLectureLinks()}</ul>
+        <div id="LeftHome">
+          <span className="Welcome">Welcome,</span><br />
+          <span className="Name">{this.props.auth.user.first_name}</span><br />
+          Your Notes:
+          {this.renderLectureLinks()}
+        </div>
         </div>
       </div>
     )
@@ -28,7 +31,7 @@ class HomeContainer extends Component {
 
     return this.props.auth.user.lectures.map( lecture => {
       const path = `/note/${lecture.id}`
-      return(<li key={lecture.id}><Link to={path} key={lecture.id}>{lecture.title}</Link></li>)
+      return(<p key={lecture.id}><Link to={path} key={lecture.id} className="HomeListing">{lecture.title}</Link></p>)
     })
   }
 

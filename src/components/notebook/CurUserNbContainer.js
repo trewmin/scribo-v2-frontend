@@ -58,35 +58,37 @@ class NotebookContainer extends Component {
     }
 
     return (
-      <div>
+      <div className="Left">
+          <Editor
+            ref={(editor) => { this.notebook = editor }}
+            editorState={this.state.editorState}
+            onChange={this.onEditorChange}
+            handleKeyCommand={this.handleKeyCommand}
+            keyBindingFn={this.myKeyBindingFn}
+            readOnly={false} />
 
-        <YouTube
-           ref={(youtube) => { this.youtube = youtube }}
-           videoId={this.state.videoId}
-           onReady={this.onYouTubeReady}
-           opts={{
-            height: '390',
-            width: '640',
-            playerVars: {
-              start: this.state.startTime,
-              autoplay: 0,
-              rel:0,
-              modestbranding: 1
-            }
-           }}
-        />
-        <input value={this.props.curNb.video_id} onChange={this.handleVideoIdChange} />
-
-        <button onClick={this.toggleTimeStamp}>Stamp</button>
-
-        <Editor
-          ref={(editor) => { this.notebook = editor }}
-          editorState={this.state.editorState}
-          onChange={this.onEditorChange}
-          handleKeyCommand={this.handleKeyCommand}
-          keyBindingFn={this.myKeyBindingFn}
-          readOnly={false} />
-
+        <div className="Video">
+          <YouTube
+             ref={(youtube) => { this.youtube = youtube }}
+             videoId={this.state.videoId}
+             onReady={this.onYouTubeReady}
+             opts={{
+              height: '312',
+              width: '512',
+              playerVars: {
+                start: this.state.startTime,
+                autoplay: 0,
+                rel:0,
+                modestbranding: 1
+              }
+             }}
+          /><br />
+          <div className="Controlls">
+            <input value={this.props.curNb.video_id} onChange={this.handleVideoIdChange} placeholder={"YouTube Video ID"} className="IDBox"/><br />
+            <button onClick={this.toggleTimeStamp} className="StampButton"><i class="material-icons big-timer">timer</i></button>
+            <p>To create a Time Stamp,<br /> click the timer above or<br /> Option-T on your Keyboard.</p>
+          </div>
+        </div>
       </div>
     )
   }

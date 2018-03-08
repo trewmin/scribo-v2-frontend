@@ -31,8 +31,7 @@ class LectureContainer extends Component {
 
   render() {
     return (
-      <div>
-        <h1>{this.props.curLect.title}</h1>
+      <div className="Main">
         {this.props.curNb.id !== null ? <CurUserNbContainer /> : ""}
       </div>
     )

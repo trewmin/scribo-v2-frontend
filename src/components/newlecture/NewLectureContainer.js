@@ -25,11 +25,13 @@ class NewLectureContainer extends Component {
 
   render() {
     return (
-      <div>
-      <br />
-      <input type='text' name={'title'} value={this.state.title} onChange={this.handleChange}/><br />
-      <br/>
-      <Link to={'/home'} ><button onClick={this.handleCreateLect}>Submit</button></Link>
+      <div className="Main">
+        <div className="Left">
+          <div className="NewLectLeft">
+          <input type='text' name={'title'} value={this.state.title} onChange={this.handleChange} className="NewNoteTitleInput"/><br />
+          <Link to={'/home'} ><button onClick={this.handleCreateLect} className="NewNoteSubmit">Create</button></Link>
+          </div>
+        </div>
       </div>
     )
   }

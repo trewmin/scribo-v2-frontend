@@ -29,24 +29,33 @@ class LoggedOutContainer extends Component {
       <div className="Main">
 
         <div className="Left">
-        <h1>Logged Out</h1>
+        <div id="LeftLoggedOut">
+        <div className="Logo">stamp</div>
+        <div className="Slogan">
+          take notes with<br/>
+          video timestamps
+        </div>
         <form onSubmit={this.handleLogin}>
-          <input type='text' placeholder='Username'/> <br/>
-          <input type='password' placeholder='Password'/> <br/><br/>
-          <input type='submit' value='Log In'/>
+          <input type='text' placeholder='Username' className="LoggedOutInput"/> <br/>
+          <input type='password' placeholder='Password' className="LoggedOutInput"/> <br/><br/>
+          <input type='submit' value='Sign In' className="LoggedOutButton"/>
         </form>
+        </div>
         </div>
 
         <div className="Right">
-        <h1>Sign Up</h1>
-        <form onSubmit={this.handleSignUp}>
-          <input type='text' placeholder='First Name'/> <br/>
-          <input type='text' placeholder='Last Name'/> <br/><br/>
-          <input type='text' placeholder='Username'/> <br/><br/>
-          <input type='password' placeholder='Password'/> <br/>
-          <input type='password' placeholder='Confirm Password'/> <br/><br/>
-          <input type='submit' value='Sign Up'/>
-        </form>
+        <div id="RightLoggedOut">
+          <div className="SignUpMsg">Don’t have a<br/>
+          Stamp Account?</div>
+          <form onSubmit={this.handleSignUp}>
+            <input type='text' placeholder='First Name'className="LoggedOutInput"/> <br/>
+            <input type='text' placeholder='Last Name'className="LoggedOutInput"/> <br/><br/>
+            <input type='text' placeholder='Username'className="LoggedOutInput"/> <br/><br/>
+            <input type='password' placeholder='Password'className="LoggedOutInput"/> <br/>
+            <input type='password' placeholder='Confirm Password'className="LoggedOutInput"/> <br/><br/>
+            <input type='submit' value='Sign Up'className="LoggedOutButton"/>
+          </form>
+        </div>
         </div>
       </div>
     )
