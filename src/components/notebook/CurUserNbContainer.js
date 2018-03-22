@@ -65,7 +65,8 @@ class NotebookContainer extends Component {
             onChange={this.onEditorChange}
             handleKeyCommand={this.handleKeyCommand}
             keyBindingFn={this.myKeyBindingFn}
-            readOnly={false} />
+            readOnly={false}
+            className="Editor"/>
 
         <div className="Video">
           <YouTube

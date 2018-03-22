@@ -150,6 +150,7 @@ h1, h2, h3, h4, h5 {
 
 #LeftHome {
   text-align: center;
+  margin-top: 3%;
 }
 
 .HomeListing {
@@ -204,4 +205,9 @@ h1, h2, h3, h4, h5 {
 .NewLectLeft {
   text-align: center;
   margin-top: 40%;
+}
+
+.DraftEditor-editorContainer, .DraftEditor-root, .public-DraftEditor-content {
+  height: 100%;
+  width: 100%;
 }
